@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import ImageUpload from './ImageUpload';
 import axios from "axios";
+import Grid from '@mui/material/Grid';
+
+
 export default function Imagelist() {
             const [imageList, setImageList] = useState([])
              const [recordForEdit, setRecordForEdit] = useState(null)
@@ -8,7 +11,15 @@ export default function Imagelist() {
             useEffect(() => {
              refreshImageList();
     }, [])
-//connection to API
+//connection to int API
+   /* const imageAPI = (url = 'https://mbgsp-portal-int.apac.bg.corpintra.net/tvapi/api/Image/') => {
+        return {
+            fetchAll: () => axios.get(url),
+            create: newRecord => axios.post(url, newRecord),
+            update: (id, updatedRecord) => axios.put(url + id, updatedRecord),
+            delete: id => axios.delete(url + id)
+        }
+    }*/
     const imageAPI = (url = 'https://localhost:44323/api/Image/') => {
         return {
             fetchAll: () => axios.get(url),
@@ -28,7 +39,7 @@ export default function Imagelist() {
             })
             .catch(err => console.log(err))
     }
-    const addOrEdit = (formData, onSuccess) => {
+   const addOrEdit = (formData, onSuccess) => {
         isLoading(true)
   const config = {
     headers: {
@@ -45,8 +56,9 @@ export default function Imagelist() {
         refreshImageList();
       })
       .catch(err => console.log(err));
-      
+     
   } 
+  
 };
 
 
@@ -55,9 +67,14 @@ export default function Imagelist() {
     }
   //delete an image
     const onDelete = (e, id) => {
+        const config = {
+            headers: {
+              'content-type': 'multipart/form-data'
+            }
+          };
         e.stopPropagation();
         if (window.confirm('Are you sure to delete this Image?'))
-            imageAPI().delete(id)
+            imageAPI().delete(id,config)
                 .then(_res => refreshImageList())
                 .catch(err => console.log(err))
     }
@@ -65,7 +82,7 @@ export default function Imagelist() {
     const imageCard = data => (  
         
         <div className="card" onClick={() => { showRecordDetails(data) }}>
-            <img src={data.imageSrc} alt="" className="card-img-top" />
+            <img src={data.imageSrc} alt="" className="cardimage" />
             <div className="card-body">
                
                 {/* <h5>{data.name}</h5> */}
@@ -86,32 +103,25 @@ return (
         </div>  </>):(<></>)}
         
            <div className='imageUploadCard'>
-                <ImageUpload 
+                <ImageUpload  
                     addOrEdit={addOrEdit}
                     recordForEdit={recordForEdit} />
            </div>
-              <div className="Images">
-                <table>
-                    <tbody>
-                        {
-                            //table for image lists in card format
-                            //tr > 3 td                       
-                            [...Array(Math.ceil(imageList.length / 10 ))].map((_e, i) => <div key={i}>
-                                <td>{imageCard(imageList[10  * i])}</td>
-                                <td>{imageList[10 * i + 1] ? imageCard(imageList[10 * i + 1]) : null}</td>
-                                <td>{imageList[10  * i + 2] ? imageCard(imageList[10  * i + 2]) : null}</td>
-                                <td>{imageList[10  * i + 3] ? imageCard(imageList[10  * i + 3]) : null}</td>
-                                <td>{imageList[10  * i + 4] ? imageCard(imageList[10  * i + 4]) : null}</td>
-                                <td>{imageList[10  * i + 5] ? imageCard(imageList[10  * i + 5]) : null}</td>
-                                <td>{imageList[10  * i + 6] ? imageCard(imageList[10  * i + 6]) : null}</td>
-                                <td>{imageList[10  * i + 7] ? imageCard(imageList[10  * i + 7]) : null}</td>
-                                <td>{imageList[10  * i + 8] ? imageCard(imageList[10  * i + 8]) : null}</td>
-                                <td>{imageList[10  * i + 9] ? imageCard(imageList[10  * i + 9]) : null}</td>
-                            </div>                          
-                            )}                       
-                    </tbody>
-                </table>
-            </div>
+            
+           <Grid container spacing={0.5} sx={{ backgroundColor: "whitesmoke" , objectFit:"cover",width:"100%", objectFit:"cover" }}>
+      {imageList.map((image) => (
+       <Grid item xs={1.5} sm={1.5} md={1.5} key={image.id}>
+        
+  {imageCard(image)
+  }
+  
+</Grid>
+      ))}
+      
+    </Grid>
+
+
+          
             </>      
     )
 }

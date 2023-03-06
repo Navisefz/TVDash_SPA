@@ -7,7 +7,7 @@ function Others() {
     <>
     <Box height={100}/>
     <SideNav/>
- <Container sx={{backgroundColor: "gray", height:"80vh",position: "relative" ,left: '50px',bottom:'20px'}}>This is Ohers Page</Container>
+ <Container sx={{backgroundColor: "white", height:"80vh",position: "relative" ,left: '50px',bottom:'20px'}}>This is Ohers Page</Container>
  
   </>
   )

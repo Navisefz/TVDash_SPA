@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 
-function ImageCarousel() {
+function ImageSlides() {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -31,4 +31,4 @@ function ImageCarousel() {
   );
 }
 
-export default ImageCarousel;
+export default ImageSlides;

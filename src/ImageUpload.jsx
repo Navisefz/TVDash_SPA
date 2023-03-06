@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-
-const defaultImageSrc = '121.jpg'
+import UploadIcon from '@mui/icons-material/Upload';
+const defaultImageSrc = 'upload.jpg'
 
 const initialFieldValues = {
     imageID: 0,
    // name: '',
   //  description: '',
     imageName: '',
-    imageSrc: defaultImageSrc,
+    imageSrc: '',
     imageFile: []
 }
 
@@ -54,7 +54,7 @@ export default function ImageUpload(props) {
       setValues({
         ...values,
         ImageFile: [],
-        ImageSrc: defaultImageSrc,
+        ImageSrc:'',
       });
     }
   
@@ -89,28 +89,39 @@ export default function ImageUpload(props) {
         
         }
       };
+      const handleClick = (event) => {
+        event.currentTarget.classList.toggle("showImage");
+      };
       
 
     const applyErrorClass = field => ((field in errors && errors[field] === false) ? ' invalid-field' : '')
 
     return (
      <>
-    
+     <div className="cards">
+    <img
+      src={values.imageSrc}
+      className="cardTop "
+      alt=""
+      onClick={handleClick}
+    />
+    <div className="cardsbody"></div>
+  </div>
          <div className='UploadImage'>
-            <form typeof='multipart/form-data' type="multipart/form-data" autoComplete="off" noValidate onSubmit={handleFormSubmit}>
-                <div className="card">
-                    <img src={values.imageSrc} className="cardTop"  alt=""/>
-                    <div className="card-body">
-                        <div className="form-group">
-                            <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc')}
+           
+                  <form typeof='multipart/form-data' type="multipart/form-data" autoComplete="off" noValidate onSubmit={handleFormSubmit}>
+               
+                  <div className="fileChoose">
+                            <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc') }
                                 onChange={showPreview} id="image-uploader" multiple/>
                         </div>
-                        
-                        <div className="form-group text-center">
-                            <button type="submit" className="btn btn-light">Upload</button>
+                        <div className="btnupload">
+                       
+                            <button type="submit" className="btn btn-light">Upload<UploadIcon /></button>
+                            
                         </div>
-                    </div>
-                </div>
+                    
+               
                 
             </form>
             </div>

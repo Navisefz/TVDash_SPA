@@ -1,6 +1,5 @@
 body {
   margin: 0;
-
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -33,78 +32,72 @@ a{
   color: #dc3545;
   background-color: #fff;
  }
-table div.card {
-  height: 120px;
-  align-items: center;
-  border: none;
-  transition: transform 0.2s;
-  top: 100px;
-  margin-top: 2px;
-background-color: whitesmoke;
-}
-table div.card:hover {
+
+.card:hover {
   cursor: pointer;
   transform: scale(1.5);
   box-shadow: 0 0 20px #333;
   z-index: 10;
+ 
 }
-table div.card:hover button.delete-button {
+.card:hover button.delete-button {
   visibility: visible;
+  size: 50px;
 
 }
 button.delete-button
 {
   visibility: visible;
   position: relative;
-  bottom: 60px;
-  background-color: whitesmoke;
+  bottom: 70px;
  border-radius: 2px;
- padding:5px;
-
+ padding:1px 1px;
+left:45px;
 
 }
-table div.card-body {
-  text-align: center;
-}
 
-table div.card img {
-  width: 110px;
-  height: 120px;
-  margin: 2px;
 
-  position: relative;
-  left: 3px;
-}
-table div.card .delete-button {
+
+.card .delete-button {
   visibility: hidden;
   
 }
-table tr td:not(:nth-child(10)){
-  border-right: 1px solid #00000020;
-  
+
+.imageUploadCard{
+align-items: center;
+height: 100px;
+width: 20%;
+background-color: whitesmoke;
+border-radius: 10px;
+padding:2px 6px;
+padding-top:15px;
+
+position: relative;
+bottom:20px;
+
 }
 
-table tr:not(:last-child) td{
-  border-bottom: 1px solid #00000020;
-}
-.imageUploadCard{
-  position: relative;
-  
-  left: 50px;
-  top:80px;
- 
+   .card{
+  object-fit: cover;
+  align-items: center;
+  margin: 0px;
+  max-width: 100%;
+  max-height:80px;
+ overflow: hidden;
+ background-size: cover;
+display: grid;
+position: relative;
+cursor: pointer;
+transition: .15s linear;
   }
- .Images {
-    position: relative;
-bottom:530px;
-   left: 400px;
-    /*height:100%;*/
-    height:100vh;
+  .cardimage{
     width: 100%;
+    height: auto;
+    object-fit: cover;
     background-size: cover;
-    display:flex;
-    flex-wrap: wrap;
+    background-repeat: no-repeat;
   }
+  
   @keyframes spinner {
     0% {
       transform: rotate(0deg);
@@ -122,59 +115,128 @@ bottom:530px;
     animation: spinner 1.5s linear infinite;
   }
 .cardTop{
-height:30vh;
+background-color: black;
+position: relative;
+display: block;
+height: 100px;
+border-radius:10px;
+width: 100%;
 }
+
 .btn {
-  padding: 10px 20px;
+  padding: 2px 20px;
   background-color: black;
   color: white;
   border: none;
- 
+ font-size: 13px;
+ position: relative;
 }
 
 .btn:hover {
-  background-color: gray;
+  background-color: whitesmoke;
+  transform: scale(1);
+ 
+}
+.UploadImage{
+  position: relative;
+  left: 200px;
+}
+.fileChoose {
+ 
+
+  height: 20px;
+  width: 100%;
+  position: relative;
+  right:180px;
+  bottom: 115px;
+}
+.cards :hover{
+  cursor: pointer;
   transform: scale(1.3);
+  box-shadow: 0 0 80px black;
+  z-index: 10;
+
+  
+}
+.btnupload{
+  position: relative;
+  right:140px;
+ bottom:80px;
+}
+.buttonUpload{
+  display: flex;
 }
 
-.form-group {
-  display: flex;
-  justify-content: center;
-  background-color: #000;
-}
 .form-control-file {
-  display:flex;
-  padding: 0;
-  font-size: 1rem;
-  line-height: 1;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border:2px solid #ced4da;
-  border-radius: .25rem;
-  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  margin:0;
+  padding: 2px;
+  font-size: 0.5rem;
+  line-height: 1.2;
+  color: black;
+  background-color: whitesmoke;
+  border-color: black;
+  text-align: center;
+  height: 100px;
   
 }
 .form-control-file:focus {
-  border-color: #80bdff;
-  outline: 0;
-  box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+  border-color: black;
+  outline: 5;
+  box-shadow: 0 0 0 12rem rgba(0, 123, 255, .25);
   
 }
 .form-control-file {
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: green;
   
 }
-.card {
-  max-width: 260px;
+.cards {
+  max-width: 400px;
   margin: 0 auto;
   border-radius: 10px;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-color: #000;
-   background-size: cover;
-   background-repeat: no-repeat
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  
+  background-color:black;
+ 
+   height:100px;
+   position: relative;
+   bottom:15px;
+   left:170px;
+}
+.cards img{
+  object-fit: cover;
+  position: relative;
+  left: 45px;
 }
 
 .carousel-inner { overflow: visible; }
+.carousel-control-next-icon, .carousel-control-prev-icon{
+  visibility:hidden;
+}
+.carousel-indicators 
+{
+  display: none;
+  visibility:hidden;
+}
+
+.imageMain{
+  height: 100vh;
+  width: 80%;
+  background-color: white;
+  justify-content: center;
+  margin: auto;
+  position: relative;
+  left: 100px;
+  padding:5px 5px;
+  margin-top: 100px;
+
+}
+.imageslistuploads{
+  background-color: gray;
+justify-content: center;
+
+}
+img {
+  max-width: 100%;
+  height: 100%;
+}

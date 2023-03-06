@@ -20,6 +20,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import { useNavigate } from 'react-router-dom';
+
 const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
@@ -102,12 +103,13 @@ export default function SideNav() {
   const [open, setOpen] = useState(false);
  // const [menuData, setMenuData] = useState("Dashboard");
   const navigate = useNavigate();
-  const [isMouseActive, setIsMouseActive] = useState(true);
+  
+  //const [isMouseActive, setIsMouseActive] = useState(true);
   
   //const handleDrawerOpen = () => {
    // setOpen(true);
   //};
-  useEffect(() => {
+  /*useEffect(() => {
     let timeoutId;
 
     const handleMouseActivity = () => {
@@ -125,7 +127,7 @@ export default function SideNav() {
       document.removeEventListener("mousemove", handleMouseActivity);
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, []);*/
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -134,7 +136,7 @@ export default function SideNav() {
     <>
      <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar sx={{opacity: isMouseActive? 1: 0, transition: "opacity 0.5s",backgroundColor:"black",color:"white" }}>
+      <AppBar sx={{transition: "opacity 0.5s",backgroundColor:"black",color:"white" }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -173,7 +175,7 @@ export default function SideNav() {
        backgroundColor: "gray",
        transform: "scale(1.12)",
         // add any other hover styles you want
-      },}}onClick={()=>{navigate("/")}}>
+      },}}onClick={()=>{navigate("/tvdash")}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -197,7 +199,7 @@ export default function SideNav() {
             </ListItem>
             <ListItem disablePadding sx={{ display: 'block', '&:hover': {
        backgroundColor: "gray",
-       transform: "scale(1.12)"} }}onClick={()=>{navigate("/Image")}}>
+       transform: "scale(1.12)"} }}onClick={()=>{navigate("/tvdash/Image")}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -220,7 +222,7 @@ export default function SideNav() {
             </ListItem>
             <ListItem disablePadding sx={{ display: 'block', '&:hover': {
        backgroundColor: "gray",
-       transform: "scale(1.12)",} }}onClick={()=>{navigate("/Roles")}}>
+       transform: "scale(1.12)",} }}onClick={()=>{navigate("/tvdash/Roles")}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -244,7 +246,7 @@ export default function SideNav() {
             </ListItem>
             <ListItem disablePadding sx={{ display: 'block' , '&:hover': {
        backgroundColor: "gray",
-       transform: "scale(1.12)",}}}onClick={()=>{navigate("/Others")}}>
+       transform: "scale(1.12)",}}}onClick={()=>{navigate("/tvdash/Others")}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
