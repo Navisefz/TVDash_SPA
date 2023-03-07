@@ -246,7 +246,7 @@ export default function SideNav() {
             </ListItem>
             <ListItem disablePadding sx={{ display: 'block' , '&:hover': {
        backgroundColor: "gray",
-       transform: "scale(1.12)",}}}onClick={()=>{navigate("/tvdash/Others")}}>
+       transform: "scale(1.12)",}}}onClick={()=>{navigate("/tvdash//Others")}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,

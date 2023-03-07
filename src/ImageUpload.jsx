@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import UploadIcon from '@mui/icons-material/Upload';
-const defaultImageSrc = 'upload.jpg'
+const defaultImageSrc = 'img/mbgsp.jpg'
 
 const initialFieldValues = {
     imageID: 0,
    // name: '',
   //  description: '',
     imageName: '',
-    imageSrc: '',
+    imageSrc: defaultImageSrc,
     imageFile: []
 }
 
@@ -54,7 +54,7 @@ export default function ImageUpload(props) {
       setValues({
         ...values,
         ImageFile: [],
-        ImageSrc:'',
+        ImageSrc:defaultImageSrc,
       });
     }
   
@@ -99,18 +99,18 @@ export default function ImageUpload(props) {
     return (
      <>
      <div className="cards">
-    <img
+       <img
       src={values.imageSrc}
       className="cardTop "
       alt=""
       onClick={handleClick}
     />
-    <div className="cardsbody"></div>
+   
   </div>
-         <div className='UploadImage'>
+        
            
                   <form typeof='multipart/form-data' type="multipart/form-data" autoComplete="off" noValidate onSubmit={handleFormSubmit}>
-               
+                  <div className='UploadImage'>
                   <div className="fileChoose">
                             <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc') }
                                 onChange={showPreview} id="image-uploader" multiple/>
@@ -122,9 +122,9 @@ export default function ImageUpload(props) {
                         </div>
                     
                
-                
+                        </div>
             </form>
-            </div>
+            
         </>
     )
 }

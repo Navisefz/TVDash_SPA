@@ -108,12 +108,12 @@ return (
                     recordForEdit={recordForEdit} />
            </div>
             
-           <Grid container spacing={0.5} sx={{ backgroundColor: "whitesmoke" , objectFit:"cover",width:"100%", objectFit:"cover" }}>
+           <Grid container spacing={0.5} sx={{ backgroundColor: "whitesmoke" , objectFit:"cover",width:"100%", objectFit:"cover"  }}>
       {imageList.map((image) => (
-       <Grid item xs={1.5} sm={1.5} md={1.5} key={image.id}>
-        
-  {imageCard(image)
-  }
+       <Grid item xs={1.5} sm={1.5} md={1.5} key={image.id} >
+        {
+        imageCard(image)
+         }
   
 </Grid>
       ))}

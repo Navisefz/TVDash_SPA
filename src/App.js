@@ -12,12 +12,10 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/tvdash" exact element={<Dashboard/>}></Route>
-      <Route path="tvdash/Image" exact element={<Image/>}></Route>
-      <Route path="tvdash/Roles" exact element={<Roles/>}></Route>
-      <Route path="tvdash/Others" exact element={<Others/>}></Route>
-      <Route path="tvdash/ImageSlides" exact element={<ImageSlides/>}></Route>
-      
-     
+      <Route path="/tvdash/Image" exact element={<Image/>}></Route>
+      <Route path="/tvdash/Roles" exact element={<Roles/>}></Route>
+      <Route path="/tvdash/Others" exact element={<Others/>}></Route>
+      <Route path="/tvdash/ImageSlides" exact element={<ImageSlides/>}></Route>
     </Routes>
     </BrowserRouter>
     </>
