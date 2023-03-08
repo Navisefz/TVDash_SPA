@@ -10,7 +10,11 @@ function Image() {
    
   
    
- <div className="imageMain"> <Imagelist/></div>
+ <div className="imageMain"> 
+      <div className='imglst'>
+        <Imagelist/>
+       </div>
+ </div>
  
      
  <SideNav/>

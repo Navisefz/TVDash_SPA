@@ -12,7 +12,7 @@ export default function Imagelist() {
              refreshImageList();
     }, [])
 //connection to int API
-   /* const imageAPI = (url = 'https://mbgsp-portal-int.apac.bg.corpintra.net/tvapi/api/Image/') => {
+  /*  const imageAPI = (url = 'https://mbgsp-portal-int.apac.bg.corpintra.net/tvapi/api/Image/') => {
         return {
             fetchAll: () => axios.get(url),
             create: newRecord => axios.post(url, newRecord),
@@ -20,7 +20,8 @@ export default function Imagelist() {
             delete: id => axios.delete(url + id)
         }
     }*/
-    const imageAPI = (url = 'https://localhost:44323/api/Image/') => {
+
+    const imageAPI = (url ='https://localhost:44323/api/Image/') => {
         return {
             fetchAll: () => axios.get(url),
             create: newRecord => axios.post(url, newRecord),
@@ -67,14 +68,10 @@ export default function Imagelist() {
     }
   //delete an image
     const onDelete = (e, id) => {
-        const config = {
-            headers: {
-              'content-type': 'multipart/form-data'
-            }
-          };
+      
         e.stopPropagation();
         if (window.confirm('Are you sure to delete this Image?'))
-            imageAPI().delete(id,config)
+            imageAPI().delete(id)
                 .then(_res => refreshImageList())
                 .catch(err => console.log(err))
     }
@@ -87,7 +84,7 @@ export default function Imagelist() {
                
                 {/* <h5>{data.name}</h5> */}
                  {/*   <span>{data.Description}</span> <br /> */}
-              
+                
                 <button className="btn btn-light delete-button" onClick={e => onDelete(e, parseInt(data.imageID))}>
                 <i className="fas fa-trash-alt"></i>
                 </button>

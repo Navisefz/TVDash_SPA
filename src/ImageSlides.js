@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel } from 'react-bootstrap';
+import Slider from 'react-slick';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function ImageSlides() {
   const [items, setItems] = useState([]);
@@ -10,25 +13,32 @@ function ImageSlides() {
       .then(data => setItems(data));
   }, []);
 
+  const settings = {
+    fade:true,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: false,
+    arrows: false,
+    swipe:false,
+    draggable:false,
+  };
   return (
-    
-    <Carousel fade pause ={false} >
+    <Slider {...settings}>
       {items.map(item => (
-        <Carousel.Item interval={5000} key={item.imageID} >
+        <div key={item.imageID}>
           <img
-            className="d-block w-100"
             src={item.imageSrc}
             alt={item.title}
             style={{ width: "100%", height: "100vh", objectFit: "cover"}}
           />
-          <Carousel.Caption>
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
-          </Carousel.Caption>
-        </Carousel.Item>
+        </div>
       ))}
-    </Carousel>
+    </Slider>
   );
 }
-
-export default ImageSlides;
+export default ImageSlides
