@@ -6,9 +6,14 @@ import 'slick-carousel/slick/slick-theme.css';
 
 function ImageCarousel() {
   const [items, setItems] = useState([]);
+  const windowUrl = window.location.href;
+  const params = new URL(windowUrl);
 
+ 
+  const floor = params.search.split("=")[1]
   useEffect(() => {
-    fetch('https://localhost:44323/api/Image/')
+    fetch('https://localhost:44313/api/Image/?floor='+ floor)
+   // fetch('https://mbgsp-portal-int.apac.bg.corpintra.net/tvapi/api/Image/')
       .then(response => response.json())
       .then(data => setItems(data));
   }, []);
@@ -33,13 +38,16 @@ function ImageCarousel() {
       {items.map(item => (
         <div key={item.imageID}>
           <img
-            src={item.imageSrc}
+            src={item.ImageSrc}
             alt={item.title}
-            style={{ width: "100%", height: "100vh", objectFit: "cover"}}
+            style={{ width: "100%", minHeight: "100vh", height:'100%',maxWeight:'100wh', objectFit: "fill"}}
           />
         </div>
+        
       ))}
+      
     </Slider>
+   
   );
 }
 export default ImageCarousel

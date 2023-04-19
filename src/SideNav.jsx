@@ -1,4 +1,4 @@
-import { useState ,useEffect} from 'react';
+import { useState} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -20,8 +20,13 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import { useNavigate } from 'react-router-dom';
-
-const drawerWidth = 200;
+import LogoutIcon from '@mui/icons-material/Logout';
+import MenuItem from '@mui/material/MenuItem';
+import {logout} from './utils/app/mainSlice';
+import { useDispatch} from "react-redux";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+const drawerWidth = 190;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
@@ -43,8 +48,8 @@ const closedMixin = (theme) => ({
   overflowX: 'hidden',
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up('sm')]: {
-    width: `calc(${theme.spacing(0)} + 0px)`,
-    display: 'none'
+    width: `calc(${theme.spacing(7)} + 0px)`,
+    // display: 'none'
 
   },
 });
@@ -60,6 +65,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
+  
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -99,6 +105,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideNav() {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
  // const [menuData, setMenuData] = useState("Dashboard");
@@ -128,6 +135,12 @@ export default function SideNav() {
       clearTimeout(timeoutId);
     };
   }, []);*/
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleLogout = () => {
+    dispatch(logout());
+  }
   const handleDrawerClose = () => {
     setOpen(false);
   };
@@ -136,52 +149,65 @@ export default function SideNav() {
     <>
      <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar sx={{transition: "opacity 0.5s",backgroundColor:"black",color:"white" }}>
+      <AppBar  open={open} sx={{transition: "opacity 0.5s",backgroundColor:"black",color:"white", }}>
+    
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={()=>{setOpen(!open)}}
+            onClick={handleDrawerOpen}
             edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
           >
             <MenuIcon />
           </IconButton>
          
-          <Typography variant="h8" noWrap component="div" sx={{position:"relative", left:"50px"}}>
-            TV Dashboard App
+          <Typography variant="h7" noWrap component="div" sx={{display:"flex", justifyContent:"flex-start", width:'100%', paddingLeft:'80px'}}>
+            TV Dashboard App  <LiveTvIcon/>
           </Typography>
-          <Typography variant="h6" noWrap component="div" sx={{position:"relative", left:"60px", alignItems:"center"}}>
-    
-            <LiveTvIcon/>
-          </Typography>
-         
-          <Typography variant="h6" noWrap component="div" sx={{position:"relative", left:"1350px",}}>
+              
+          <Typography variant="h7" noWrap component="div" sx={{display:"flex", justifyContent:"flex-end", width:'100%'}}>
+          <MenuItem onClick={handleLogout}> Logout < LogoutIcon/></MenuItem>
         
-          {/*<ProfileMenu />*/}
           </Typography>
           
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open} sx={{  }}>
+      <Drawer 
+      sx={{
+        width: drawerWidth,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+        },
+      }}
+        anchor="left"
+        variant="permanent"
+        open={open} 
+      >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-           {/* {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}*/}
+          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
          
             <ListItem disablePadding sx={{ display: 'block' , '&:hover': {
-       backgroundColor: "gray",
+       backgroundColor: "gray", 
        transform: "scale(1.12)",
         // add any other hover styles you want
-      },}}onClick={()=>{navigate("/tvdash")}}>
+      },}}onClick={()=>{navigate("/tvdash?floor=10")}}>
               <ListItemButton
                 sx={{
                   minHeight: 48,
                   justifyContent: open ? 'initial' : 'center',
                   px: 2.5,
-                
+                  
                 }}
               >
                 <ListItemIcon
@@ -190,6 +216,7 @@ export default function SideNav() {
                     mr: open ? 3 : 'auto',
                     justifyContent: 'center',
                     color: "white",
+                    
                   }}
                 >
                 <DashboardIcon/>
@@ -220,53 +247,10 @@ export default function SideNav() {
                 <ListItemText primary="Image"sx={{ opacity: open ? 1 : 0 ,  color: "white",}} />
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding sx={{ display: 'block', '&:hover': {
-       backgroundColor: "gray",
-       transform: "scale(1.12)",} }}onClick={()=>{navigate("/tvdash/Roles")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                  
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    color: "white",
-                  }}
-                >
-                 <GroupIcon />
-                </ListItemIcon>
-                <ListItemText primary="Roles"sx={{ opacity: open ? 1 : 0 ,  color: "white",}} />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding sx={{ display: 'block' , '&:hover': {
-       backgroundColor: "gray",
-       transform: "scale(1.12)",}}}onClick={()=>{navigate("/tvdash//Others")}}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                    color: "white",
-                  }}
-                >
-                 <ContactSupportIcon />
-                </ListItemIcon>
-                <ListItemText primary="Others"sx={{ opacity: open ? 1 : 0,  color: "white" }} />
-              </ListItemButton>
-            </ListItem>
+            
+                
+               
+
         </List>
         <Divider />
       
@@ -277,4 +261,5 @@ export default function SideNav() {
     </>
    
   );
+ 
 }

@@ -71,7 +71,6 @@ background-color: whitesmoke;
 border-radius: 10px;
 padding:2px 6px;
 padding-top:15px;
-
 position: relative;
 bottom:20px;
 
@@ -90,7 +89,6 @@ position: relative;
 cursor: pointer;
 transition: .15s linear;
 padding-bottom: 56.25%;
-
   }
   .cardimage{
     width: 100%;
@@ -142,7 +140,7 @@ width: 100%;
 }
 
 .btn:hover {
-  background-color: whitesmoke;
+  background-color: gray;
   transform: scale(1);
  
 }
@@ -171,6 +169,8 @@ width: 100%;
   position: relative;
   right:140px;
  bottom:80px;
+ align-items: center;
+
 }
 .buttonUpload{
   display: flex;
@@ -228,14 +228,15 @@ width: 100%;
 }
 .imageMain{
   height: 100vh;
-  width: 80%;
+  width: 100%;
   background-color: white;
   justify-content: center;
   margin: auto;
   position: relative;
-  left: 100px;
+  left: 10px;
   padding:5px 5px;
   margin-top: 100px;
+  top:20px;
 
 }
 .imageslistuploads{
@@ -246,4 +247,127 @@ justify-content: center;
 img {
   max-width: 100%;
   height: 100%;
+}
+.modal-dialog {
+  width: 30%;
+}
+.selectFloor{
+  position: relative;
+  bottom:120px;
+  width: 10%;
+}
+/*RESPONSIVE GRIDS*/
+/*grid-template-columns:repeat(auto-fit, minmax(120px,1fr));  */  
+/* grid-template-columns: repeat(3,1fr)*/
+/*grid-template-columns:repeat(1,1fr)*/
+.floorname{
+  color: white;
+  font-weight: bold;
+  position: relative;
+  bottom:90px;
+  font-size: large;
+  text-align: center;
+}
+.login-logo{
+  font-weight: 300;
+  margin-bottom: .9rem;
+  opacity: '.8';
+  width: 120px;
+}
+
+/* .css-n7rtur-MuiPaper-root-MuiAppBar-root, .css-104q197-MuiPaper-root-MuiAppBar-root{
+  z-index: 120 !important;
+} */
+
+.themeMBGSP{
+  color: #ffffff !important;
+  background-color: #000000 !important;
+}
+
+.removeUnderLine{
+  text-decoration: none !important;
+}
+
+.marginTopDefault{
+  margin-top: 10px;
+}
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+.colorWhite{
+  color: #ffffff !important;
+}
+
+#footer
+{
+    clear: both;
+    border: 1px groove #aaaaaa;
+    color: White;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    line-height: normal;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.displayHide{
+  display:none !important;
+}
+
+.displayHoverNone:hover{
+  background-color : transparent !important;
+}
+
+.imgBlob {
+  display: inline-block;
+  height: 213px;
+  width: 320px;
+}
+img[src=""] {
+  visibility: hidden;
+  background-color:#ddd;
+}
+
+.clickableHandCursor:hover {
+  cursor: pointer;
+}
+.deleteImageModal{
+  color: black;
+}
+.modalTitle {
+  color:red;
+  font-size: 1.1rem;
+}
+.modal-footer button.btn-primary:hover {
+  background-color: red;
+  border-color: red;
+}
+
+.modal-footer button.btn-secondary:hover {
+  background-color:  green;
+  border-color: green;
+}
+.pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.gridimages{
+  width: 100%;
+  
 }
