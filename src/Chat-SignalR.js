@@ -31,7 +31,6 @@ export default () => {
    const floor = new URLSearchParams(window.location.search).get('floor');
    axios
     // .get(`https://localhost:44313/api/Image/?floor=10`)
-   
     .get(`https://localhost:44313/api/Image/?floor=${floor}`)
     .then((res) => {
       console.log(res.data);
@@ -55,30 +54,30 @@ function refresh(msg) {
    
 }
    
-  return (
-    <div className="wrapper">
+  return 
+    // <div className="wrapper">
      
        
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={_ => {
-                const msg = {
-                  id: Math.random() * 10,
-                  message,
-                  userName: userName
-                };
-                setMessages([...messages, msg]);
-                setMessage("");
+    //         <button
+    //           className="btn btn-primary btn-sm"
+    //           onClick={_ => {
+    //             const msg = {
+    //               id: Math.random() * 10,
+    //               message,
+    //               userName: userName
+    //             };
+    //             setMessages([...messages, msg]);
+    //             setMessage("");
 
-                refresh(msg)
+    //             refresh(msg)
                 
-              }}
-            >
-              Send
-            </button>
-          </div>
+    //           }}
+    //         >
+    //           Send
+    //         </button>
+    //       </div>
         
       
    
-  );
+  
 };
