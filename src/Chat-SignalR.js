@@ -24,8 +24,6 @@ export default () => {
       .build();
     await socketConnection.start();
     setConnection(socketConnection);
-
-   
     
   }, []);
    const floor = new URLSearchParams(window.location.search).get('floor');
