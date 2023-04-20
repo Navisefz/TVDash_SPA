@@ -1,11 +1,11 @@
 import React from 'react';
 //Modules imports
-import Dashboard from './Components/Dashboard';
+import Dashboard from './components/Dashboard';
 import NotFoundPage from './OtherPages/404';
 import Login from './Auth/Login';
 import {Navigate} from 'react-router-dom';
 import ImageSlides from './ImageSlides';
-import Image from './Components/Image';
+import Image from './components/Image';
 
 
 // Module Routes

@@ -3,7 +3,7 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import { rootRoutes }  from '../app-modules';
 import { integrationRootRoutes} from '../app-modules';
-import Copyright from '../Components/Copyright';
+import Copyright from '../components/Copyright';
 //MUI
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
