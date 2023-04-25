@@ -108,7 +108,7 @@ const Apps = (props) => {
       <React.Fragment>
         <BrowserRouter>
           {isLogin ? <AuthenticatedApp/> : <UnAuthenticatedApp />}
-          <ChatSignalR/>
+        
         </BrowserRouter>
       
       </React.Fragment>

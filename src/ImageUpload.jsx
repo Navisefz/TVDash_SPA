@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import UploadIcon from '@mui/icons-material/Upload';
+import axios from "axios";
+import {HubConnectionBuilder, LogLevel,HttpTransportType} from "@microsoft/signalr";
+
 const defaultImageSrc = 'img/mbgsp.jpg'
 
 const initialFieldValues = {
@@ -12,9 +15,32 @@ const initialFieldValues = {
 
 export default function ImageUpload(props) {
   const { addOrEdit, recordForEdit } = props
-
+  
   const [values, setValues] = useState(initialFieldValues)
   const [errors, setErrors] = useState({})
+  const [userName, setUserName] = useState("");
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [connection, setConnection] = useState();
+
+  useEffect(async () => {
+    const socketConnection = new HubConnectionBuilder()
+      .configureLogging(LogLevel.Debug)
+      .withUrl("https://localhost:44313/imageHub", {
+        skipNegotiation: true,
+        transport: HttpTransportType.WebSockets
+      })
+      .build();
+    await socketConnection.start();
+    setConnection(socketConnection);
+  }, []);
+
+  
+
+  connection &&
+    connection.on("message", message => {
+      setMessages(message); 
+    });
 
   useEffect(() => {
     if (recordForEdit != null)
@@ -89,7 +115,19 @@ export default function ImageUpload(props) {
             <input type="file" accept="image/*" className={"form-control-file" + applyErrorClass('imageSrc') } onChange={showPreview} id="image-uploader" multiple />
           </div>
           <div className="btnupload">
-            <button type="submit" className="btn btn-light">Upload<UploadIcon /></button>
+            
+            <button type="submit" className="btn btn-light"
+             onClick={_ => {
+              const msg = {
+                id: Math.random() * 10,
+                message,
+                userName: userName
+              };
+              setMessage("");
+              connection && connection.invoke("message", msg);
+            }}
+            
+            >Upload<UploadIcon /></button>
           </div>
         </div>
       

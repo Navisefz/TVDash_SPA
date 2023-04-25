@@ -20,6 +20,7 @@ export default function Imagelist() {
              const [recordForEdit, setRecordForEdit] = useState(null)
              const [loading, isLoading] = useState(false)
              const [showModal, setShowModal] = useState(false);
+            
              //const handleModalShow = () => setShowModal(true);
              const [deleteId, setDeleteId] = useState(null);
              const windowUrl = window.location.href;
@@ -42,7 +43,9 @@ export default function Imagelist() {
               };
           
 const handleModalClose = () => setShowModal(false);
-            useEffect(() => {
+
+
+      useEffect(() => {
              refreshImageList();
     }, [])
 //connection to int API
@@ -112,14 +115,17 @@ const handleModalClose = () => setShowModal(false);
     e.stopPropagation();
     setDeleteId(id);
     setShowModal(true);
+  
   };
   const handleDelete = id => {
     imageAPI2().delete(id)
       .then(_res => {
+       
         refreshImageList();
         setShowModal(false);
         setDeleteId(null);
         setShowSnackbar(true);
+     
         setSnackbarMessage('Image deleted successfully');
       })
       .catch(err => {
