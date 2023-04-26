@@ -40,8 +40,6 @@ function ImageSlides() {
     fetchImages();
   }, []);
 
-  
-
 const [count,setcount] = useState([]);
 
   connection &&
