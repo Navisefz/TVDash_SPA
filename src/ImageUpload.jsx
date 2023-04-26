@@ -116,18 +116,32 @@ export default function ImageUpload(props) {
           </div>
           <div className="btnupload">
             
-            <button type="submit" className="btn btn-light"
-             onClick={_ => {
-              const msg = {
-                id: Math.random() * 10,
-                message,
-                userName: userName
-              };
-              setMessage("");
-              connection && connection.invoke("message", msg);
-            }}
-            
-            >Upload<UploadIcon /></button>
+          <button
+  type="submit"
+  className="btn btn-light"
+  onClick={(e) => {
+    const msg = {
+      id: Math.random() * 10,
+      message,
+      userName: userName
+    };
+    setMessage("");
+    connection && connection.invoke("message", msg);
+  }}
+  onDoubleClick={(e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.currentTarget.disabled = true;
+    e.currentTarget.click();
+    setTimeout(() => {
+      e.currentTarget.click();
+      e.currentTarget.disabled = false;
+    }, 200);
+  }}
+>
+  Upload
+  <UploadIcon />
+</button>
           </div>
         </div>
       
