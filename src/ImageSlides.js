@@ -23,7 +23,6 @@ function ImageSlides() {
         console.log(err);
       });
   };
-
   useEffect(async () => {
     const socketConnection = new HubConnectionBuilder()
       .configureLogging(LogLevel.Debug)
