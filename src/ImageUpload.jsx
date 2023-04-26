@@ -23,30 +23,9 @@ export default function ImageUpload(props) {
   const [messages, setMessages] = useState([]);
   const [connection, setConnection] = useState();
 
-  useEffect( () => {
-
-     const loadData= async() => 
-     {
-    
-    const socketConnection = new HubConnectionBuilder()
-      .configureLogging(LogLevel.Debug)
-      .withUrl("https://localhost:44313/imageHub", {
-        skipNegotiation: true,
-        transport: HttpTransportType.WebSockets
-      })
-      .build();
-    await socketConnection.start();
-    setConnection(socketConnection);
-     };
-     loadData();
-  }, []);
-
   
 
-  connection &&
-    connection.on("message", message => {
-      setMessages(message); 
-    });
+  
 
   useEffect(() => {
     if (recordForEdit != null)
@@ -126,24 +105,9 @@ export default function ImageUpload(props) {
   type="submit"
   className="btn btn-light"
   onClick={(e) => {
-    const msg = {
-      id: Math.random() * 10,
-      message,
-      userName: userName
-    };
-    setMessage("");
-    connection && connection.invoke("message", msg);
+   
   }}
-  onDoubleClick={(e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    e.currentTarget.disabled = true;
-    e.currentTarget.click();
-    setTimeout(() => {
-      e.currentTarget.click();
-      e.currentTarget.disabled = false;
-    }, 200);
-  }}
+  
 >
   Upload
   <UploadIcon />

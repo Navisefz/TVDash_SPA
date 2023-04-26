@@ -14,11 +14,24 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+import {HubConnectionBuilder, LogLevel,HttpTransportType} from "@microsoft/signalr";
+
 export default function Imagelist() {
   const [imageList, setImageList] = useState([]);
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [loading, isLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [connection, setConnection] = useState();
+  const [userName, setUserName] = useState("");
+
+  const msg = {
+    id: Math.random() * 10,
+    message,
+    userName: userName
+  };
 
   //const handleModalShow = () => setShowModal(true);
   const [deleteId, setDeleteId] = useState(null);
@@ -46,6 +59,32 @@ export default function Imagelist() {
   useEffect(() => {
     refreshImageList();
   }, []);
+
+
+  useEffect( () => {
+
+    const loadData= async() => 
+    {
+   
+   const socketConnection = new HubConnectionBuilder()
+     .configureLogging(LogLevel.Debug)
+     .withUrl("https://localhost:44313/imageHub", {
+       skipNegotiation: true,
+       transport: HttpTransportType.WebSockets
+     })
+     .build();
+   await socketConnection.start();
+   setConnection(socketConnection);
+    };
+    loadData();
+ }, []);
+
+ 
+
+ connection &&
+ connection.on("message", message => {
+   setMessages(message); 
+ });
   //connection to int API
   /*const imageAPI = (url = 'https://mbgsp-portal-int.apac.bg.corpintra.net/tvapi/api/Image/') => {
         return {
@@ -100,6 +139,7 @@ export default function Imagelist() {
         .then((_res) => {
           onSuccess();
           refreshImageList();
+          connection && connection.invoke("message", msg);
         })
         .catch((err) => console.log(err));
     }
@@ -121,7 +161,7 @@ export default function Imagelist() {
         setShowModal(false);
         setDeleteId(null);
         setShowSnackbar(true);
-
+        connection && connection.invoke("message", msg);
         setSnackbarMessage("Image deleted successfully");
       })
       .catch((err) => {

@@ -55,8 +55,8 @@ const [count,setcount] = useState([]);
     });
 
     useEffect(() => {
-   
-      fetchImages();
+  fetchImages()
+      
     }, [count]);
 
   return (
