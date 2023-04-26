@@ -23,17 +23,23 @@ function ImageSlides() {
         console.log(err);
       });
   };
-  useEffect(async () => {
-    const socketConnection = new HubConnectionBuilder()
-      .configureLogging(LogLevel.Debug)
-      .withUrl("https://localhost:44313/imageHub", {
-        skipNegotiation: true,
-        transport: HttpTransportType.WebSockets,
-      })
-      .build();
-    await socketConnection.start();
-    setConnection(socketConnection);
-  }, []);
+  useEffect( () => {
+
+    const loadData= async() => 
+    {
+   
+   const socketConnection = new HubConnectionBuilder()
+     .configureLogging(LogLevel.Debug)
+     .withUrl("https://localhost:44313/imageHub", {
+       skipNegotiation: true,
+       transport: HttpTransportType.WebSockets
+     })
+     .build();
+   await socketConnection.start();
+   setConnection(socketConnection);
+    };
+    loadData();
+ }, []);
 
 
   useEffect(() => {
@@ -62,7 +68,7 @@ const [count,setcount] = useState([]);
       controls={false}
     >
       {items.map((item) => (
-        <Carousel.Item key={item.imageID}>
+        <Carousel.Item key={item.ImageID}>
           <img
             src={item.ImageSrc}
             alt={item.title}

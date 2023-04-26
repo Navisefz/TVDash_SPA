@@ -23,7 +23,11 @@ export default function ImageUpload(props) {
   const [messages, setMessages] = useState([]);
   const [connection, setConnection] = useState();
 
-  useEffect(async () => {
+  useEffect( () => {
+
+     const loadData= async() => 
+     {
+    
     const socketConnection = new HubConnectionBuilder()
       .configureLogging(LogLevel.Debug)
       .withUrl("https://localhost:44313/imageHub", {
@@ -33,6 +37,8 @@ export default function ImageUpload(props) {
       .build();
     await socketConnection.start();
     setConnection(socketConnection);
+     };
+     loadData();
   }, []);
 
   
