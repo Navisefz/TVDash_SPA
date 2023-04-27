@@ -12,7 +12,7 @@ import { BrowserRouter } from "react-router-dom";
 import {ON_UNLOAD_MESSAGE} from './utils/contants';
 import {useEffect } from 'react';
 import {updateEnvironmentMode} from "./utils/app/mainSlice";
-import ChatSignalR from './Chat-SignalR';
+
 
 let persistor = persistStore(store);
 const container = document.getElementById('root');
