@@ -264,6 +264,7 @@ export default function Imagelist() {
         <ImageUpload addOrEdit={addOrEdit} recordForEdit={recordForEdit} />
       </div>
       <Grid
+      
         container
         spacing={0.5}
         sx={{
@@ -273,6 +274,7 @@ export default function Imagelist() {
         }}
         
       >
+        
         {imageList.map((image) => (
           <Grid
             className="gridimages"
@@ -281,6 +283,7 @@ export default function Imagelist() {
             sm={1.5}
             md={1.5}
             key={image.ImageID}
+          
           >
             {imageCard(image)}
           </Grid>

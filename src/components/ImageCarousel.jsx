@@ -1,53 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import Slider from 'react-slick';
-
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-
+import React, { useState, useEffect } from "react";
+import Carousel from "react-bootstrap/Carousel";
+import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
+import {
+  HubConnectionBuilder,
+  LogLevel,
+  HttpTransportType,
+} from "@microsoft/signalr";
 function ImageCarousel() {
   const [items, setItems] = useState([]);
-  const windowUrl = window.location.href;
-  const params = new URL(windowUrl);
+  const [connection, setConnection] = useState();
 
- 
-  const floor = params.search.split("=")[1]
+  const fetchImages = async () => {
+    const floor = new URLSearchParams(window.location.search).get("floor");
+    await axios
+      .get(`https://localhost:44313/api/Image/?floor=${floor}`)
+      .then((res) => {
+        console.log(res);
+        setItems([...res.data]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect( () => {
+
+    const loadData= async() => 
+    {
+   
+   const socketConnection = new HubConnectionBuilder()
+     .configureLogging(LogLevel.Debug)
+     .withUrl("https://localhost:44313/imageHub", {
+       skipNegotiation: true,
+       transport: HttpTransportType.WebSockets
+     })
+     .build();
+   await socketConnection.start();
+   setConnection(socketConnection);
+    };
+    loadData();
+ }, []);
+
+
   useEffect(() => {
-    fetch('https://localhost:44313/api/Image/?floor='+ floor)
-   // fetch('https://mbgsp-portal-int.apac.bg.corpintra.net/tvapi/api/Image/')
-      .then(response => response.json())
-      .then(data => setItems(data));
+    fetchImages();
   }, []);
 
-  const settings = {
-    fade:true,
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    pauseOnHover: false,
-    arrows: false,
-    swipe:false,
-    draggable:false,
-  };
+const [count,setcount] = useState([]);
+
+  connection &&
+    connection.on("message", (message) => {
+      setcount(message);
+      
+    });
+
+    useEffect(() => {
+  fetchImages()
+      
+    }, [count]);
 
   return (
-    <Slider {...settings}>
-      {items.map(item => (
-        <div key={item.imageID}>
+    <Carousel
+      fade
+      interval={5000}
+      pause={false}
+      indicators={false}
+      controls={false}
+    >
+      {items.map((item) => (
+        <Carousel.Item key={item.ImageID}>
           <img
             src={item.ImageSrc}
             alt={item.title}
-            style={{ width: "100%", minHeight: "100vh", height:'100%',maxWeight:'100wh', objectFit: "fill"}}
+            style={{
+              width: "100%",
+              minHeight: "100vh",
+             height:'100%',
+             minWidth:'100vh',
+              objectFit: "fixed",
+            }}
           />
-        </div>
-        
+        </Carousel.Item>
       ))}
-      
-    </Slider>
-   
+    </Carousel>
   );
 }
-export default ImageCarousel
+export default ImageCarousel;
