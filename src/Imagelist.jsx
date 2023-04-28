@@ -157,11 +157,12 @@ export default function Imagelist() {
     imageAPI2()
       .delete(id)
       .then((_res) => {
+        connection && connection.invoke("message", msg);
         refreshImageList();
         setShowModal(false);
         setDeleteId(null);
         setShowSnackbar(true);
-        connection && connection.invoke("message", msg);
+      
         setSnackbarMessage("Image deleted successfully");
       })
       .catch((err) => {
