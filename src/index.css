@@ -38,7 +38,6 @@ a{
   transform: scale(1.5);
   box-shadow: 0 0 20px #333;
   z-index: 10;
- 
 }
 .card:hover button.delete-button {
   visibility: visible;
@@ -53,16 +52,10 @@ button.delete-button
  border-radius: 2px;
  padding:1px 1px;
 left:45px;
-
 }
-
-
-
 .card .delete-button {
   visibility: hidden;
-  
 }
-
 .imageUploadCard{
 align-items: center;
 height: 100px;
@@ -75,15 +68,14 @@ position: relative;
 bottom:20px;
 
 }
-
    .card{
-  object-fit: cover;
-  align-items: center;
-  margin: 0px;
-  max-width: 100%;
-  max-height:80px;
- overflow: hidden;
- background-size: cover;
+object-fit: cover;
+align-items: center;
+margin: 0px;
+max-width: 100%;
+max-height:80px;
+overflow: hidden;
+background-size: cover;
 display: grid;
 position: relative;
 cursor: pointer;
@@ -96,15 +88,12 @@ padding-bottom: 56.25%;
     object-fit: cover;
     background-size: cover;
     background-repeat: no-repeat;
+   
   }
   img.cardTop.showImage
   {
    position: relative;
-
- 
   }
-  
-  
   @keyframes spinner {
     0% {
       transform: rotate(0deg);
@@ -215,6 +204,7 @@ width: 100%;
   object-fit: cover;
   position: relative;
   left: 45px;
+  
 }
 
 .carousel-inner { overflow: visible; }
@@ -369,5 +359,17 @@ img[src=""] {
 }
 .gridimages{
   width: 100%;
-  
+}
+.floorname1{
+  color: white;
+  font-weight: bold;
+  position: relative;
+  top:15px;
+  font-size: large;
+  text-align: center;
+}
+.selectFloor1{
+  position: relative;
+  bottom:20px;
+  width: 10%;
 }
