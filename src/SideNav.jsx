@@ -145,7 +145,7 @@ export default function SideNav() {
                 paddingLeft: "10px",
               }}
             >
-              TV Dashboard App <LiveTvIcon />
+              TV Dashboard App <LiveTvIcon sx={{width:"50px"}}/>
             </Typography>
 
             <Typography
